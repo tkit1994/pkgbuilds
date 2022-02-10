@@ -25,3 +25,5 @@
 
 # user repository
 .repo
+
+!.github/**/*
