@@ -1,0 +1,47 @@
+# This is a basic workflow to help you get started with Actions
+
+name: nvchecker cron runner
+
+# Controls when the workflow will run
+on:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: 0 16 * * *
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: install packages
+        run: sudo apt install libcurl4-openssl-dev libssl-dev
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9 # Version range or exact version of a Python version to use, using SemVer's version range syntax
+
+      - name: install nvchecker
+        run: sudo pip3 install nvchecker
+
+      - name: run nvchecker
+        id: run_nvchecker
+        run: |
+          echo "::set-output name=result::$(nvchecker -c nvchecker.toml)"
+
+      - name: send telegram message on push
+        uses: appleboy/telegram-action@master
+        if: steps.run_nvchecker.result != ''
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            The following packages need to be updated:
+            ${{ steps.run_nvchecker.result }}
