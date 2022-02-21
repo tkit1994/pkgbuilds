@@ -1,6 +1,7 @@
 [__config__]
 oldver = "old_ver.json"
 newver = "new_ver.json"
+
 [code-nautilus-git]
 source = "github"
 github = "harry-cpp/code-nautilus"
@@ -12,3 +13,7 @@ github = "AmazaspShumik/sklearn-bayes"
 [free-wb]
 source = "cmd"
 cmd = "curl -s https://d.store.deepinos.org.cn///store/tools/freewb/app.json  | jq -r '.Version'"
+
+[transfer-git]
+source = "github"
+github = "Mikubill/transfer"
