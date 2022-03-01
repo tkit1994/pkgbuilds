@@ -38,7 +38,7 @@ jobs:
 
       - name: send telegram message on push
         uses: appleboy/telegram-action@master
-        if: steps.run_nvchecker.result != ''
+        if: steps.run_nvchecker.outputs.result != ''
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
