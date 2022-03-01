@@ -34,11 +34,11 @@ jobs:
       - name: run nvchecker
         id: run_nvchecker
         run: |
-          echo "::set-output name=result::$(nvchecker -c nvchecker.toml)"
+          echo "::set-output name=result::$(nvchecker -c nvchecker.toml 2>&1)"
 
       - name: send telegram message on push
         uses: appleboy/telegram-action@master
-#         if: steps.run_nvchecker.outputs.result != ''
+        if: steps.run_nvchecker.outputs.result != ''
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
