@@ -17,3 +17,8 @@ cmd = "curl -s https://d.store.deepinos.org.cn///store/tools/freewb/app.json  | 
 [transfer-git]
 source = "github"
 github = "Mikubill/transfer"
+
+[netease-cloud-music-gtk]
+source = "github"
+github = "gmg137/netease-cloud-music-gtk"
+use_latest_release = true
