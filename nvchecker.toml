@@ -22,3 +22,8 @@ github = "Mikubill/transfer"
 source = "github"
 github = "gmg137/netease-cloud-music-gtk"
 use_latest_release = true
+
+[aliyundrive-webdav]
+source = "github"
+github = "messense/aliyundrive-webdav"
+use_latest_release = true
