@@ -15,3 +15,9 @@ use_latest_release = true
 source = "github"
 github = "messense/aliyundrive-webdav"
 use_latest_release = true
+
+[transfer-bin]
+source = "github"
+github = "Mikubill/transfer"
+use_latest_release = true
+
