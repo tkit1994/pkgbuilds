@@ -5,6 +5,7 @@
   "netease-cloud-music-gtk": "2.0.1",
   "netease-cloud-music-gtk4": "2.0.2",
   "python-sklearn-bayes": "20210922.215432",
+  "stream-url-bin": "v0.1.2",
   "transfer-bin": "v0.4.17",
   "transfer-git": "20220717.110329"
 }

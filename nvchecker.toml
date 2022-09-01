@@ -21,3 +21,8 @@ source = "github"
 github = "Mikubill/transfer"
 use_latest_release = true
 
+[stream-url-bin]
+source = "github"
+github = "tkit1994/stream-url"
+use_latest_release = true
+
