@@ -26,3 +26,8 @@ source = "github"
 github = "tkit1994/stream-url"
 use_latest_release = true
 
+[unblockneteasemusic-bin]
+source = "github"
+github = "UnblockNeteaseMusic/server"
+use_latest_release = true
+
