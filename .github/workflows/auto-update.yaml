@@ -1,0 +1,13 @@
+name: CI
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: docker.io/archlinux:latest
+    steps:
+      - uses: actions/checkout@main
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
