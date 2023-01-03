@@ -26,13 +26,13 @@ jobs:
 
       - name: Config git user and email
         run: |
-          su makepkg
-          git config --global user.name tkit1994
+          su makepkg && \
+          git config --global user.name tkit1994 && \
           git config --global user.email ch1994@outlook.com
 
       - name: Set up github token
         run: |
-          su makepkg
+          su makepkg && \
           cat << EOF > key.toml
           [keys]
           github = "${{ secrets.GITHUB_TOKEN }}"
