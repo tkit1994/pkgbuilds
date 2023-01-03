@@ -13,14 +13,14 @@ jobs:
           pacman -Syy --noconfirm
           pacman -S --needed --noconfirm git jq aurpublish nvchecker make
 
+      - uses: actions/checkout@main
+
       - name: Set up github token
         run: |
           cat << EOF > key.toml
           [key]
-          # github = "${{ secrets.GITHUB_TOKEN }}"
+          github = "${{ secrets.GITHUB_TOKEN }}"
           EOF
-
-      - uses: actions/checkout@main
 
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
