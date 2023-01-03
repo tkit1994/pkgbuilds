@@ -21,8 +21,8 @@ jobs:
         run: |
           useradd -g wheel -m makepkg
           echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-          # this is to fix GIT not liking owner of the checkout dir
           chown -R makepkg:root $PWD
+          git config --global --add safe.directory $PWD
 
       - name: Config git user and email
         run: |
