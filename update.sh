@@ -18,7 +18,7 @@ function update_pkg() {
 		pushd $PKG_NAME
 		sed "s/^pkgver=.*$/pkgver=${NEW_VER}/" -i PKGBUILD
 		sed "s/^pkgrel=.*$/pkgrel=1/" -i PKGBUILD
-		updpkgsums
+		su makepkg -c "updpkgsums"
 		popd
 		git add .
 		git commit

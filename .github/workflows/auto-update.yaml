@@ -6,21 +6,32 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ghcr.io/tkit1994/pkgbuilds:latest
+    container: docker.io/archlinux:latest
     steps:
-      - name: Set ownership
-        run:
-          sudo chown -R makepkg:root $PWD
+      - name: Install packages
+        run: |
+          pacman -Syy --noconfirm
+          pacman -S --needed --noconfirm \
+            git jq aurpublish nvchecker make pacman-contrib vim \
+            sudo
 
       - uses: actions/checkout@main
 
+      - name: Set ownership
+        run: |
+          useradd -g wheel -m makepkg
+          echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+          # this is to fix GIT not liking owner of the checkout dir
+          chown -R makepkg:root $PWD
+
       - name: Config git user and email
         run: |
-          git config --global user.name "github action bot" && \
-          git config --global user.email action@github.com
+          git config --global user.name tkit1994 && \
+          git config --global user.email ch1994@outlook.com
 
       - name: Set up github token
         run: |
+          su makepkg && \
           cat << EOF > key.toml
           [keys]
           github = "${{ secrets.GITHUB_TOKEN }}"
