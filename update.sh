@@ -28,7 +28,7 @@ function update_pkg() {
 }
 
 function check_ver() {
-	nvchecker --logger both -c nvchecker.toml | tee nvchecker.log
+	nvchecker --logger both -c nvchecker.toml -k key.toml | tee nvchecker.log
 	nvtake -c nvchecker.toml --all
 	git add .
 	if git diff --exit-code >/dev/null; then
