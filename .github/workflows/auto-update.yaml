@@ -15,6 +15,13 @@ jobs:
 
       - uses: actions/checkout@main
 
+      - name: Set ownership
+        run: |
+          # this is to fix GIT not liking owner of the checkout dir
+          chown -R $(id -u):$(id -g) $PWD
+          git config --global user.name tkit1994
+          git config --global user.email ch1994@outlook.com
+
       - name: Set up github token
         run: |
           cat << EOF > key.toml
