@@ -8,14 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     container: docker.io/archlinux:latest
     steps:
-      - uses: actions/checkout@main
-        with:
-          fetch-depth: 0
-
       - name: Install packages
         run: |
           pacman -Syy --noconfirm
           pacman -S --needed --noconfirm git jq aurpublish
+
+      - uses: actions/checkout@main
 
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
