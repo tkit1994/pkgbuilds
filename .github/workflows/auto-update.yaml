@@ -9,7 +9,8 @@ jobs:
     container: ghcr.io/tkit1994/pkgbuilds:latest
     steps:
       - name: Set ownership
-        run: chown -R $(id -u):$(id -g) $PWD
+        run:
+          sudo chown -R makepkg:root $PWD
 
       - uses: actions/checkout@main
 
