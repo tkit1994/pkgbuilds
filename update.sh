@@ -1,6 +1,6 @@
 #!/bin/bash
 # set -x
-set -e
+# set -e
 function update_pkg() {
 	PKG_NAME=$1
 	NEW_VER=$(echo "$2" | sed 's/^[^.0-9]*//')
@@ -21,8 +21,7 @@ function update_pkg() {
 		su makepkg -c "updpkgsums"
 		popd
 		git add .
-		git commit
-		aurpublish $PKG_NAME
+		su makepkg -c "git commit"
 		;;
 	esac
 }

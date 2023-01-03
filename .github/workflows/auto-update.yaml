@@ -26,8 +26,8 @@ jobs:
 
       - name: Config git user and email
         run: |
-          git config --global user.name tkit1994 && \
-          git config --global user.email ch1994@outlook.com
+          git config user.name tkit1994 && \
+          git config user.email ch1994@outlook.com
 
       - name: Set up github token
         run: |
