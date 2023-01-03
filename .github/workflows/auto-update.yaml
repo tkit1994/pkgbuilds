@@ -1,38 +1,25 @@
 name: CI
 on:
   workflow_dispatch:
-  pull_request:
+  # pull_request:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: docker.io/archlinux:latest
+    container: ghcr.io/tkit1994/pkgbuilds:latest
     steps:
-      - name: Install packages
-        run: |
-          pacman -Syy --noconfirm
-          pacman -S --needed --noconfirm \
-            git jq aurpublish nvchecker make pacman-contrib vim \
-            sudo
-
       - uses: actions/checkout@main
 
       - name: Set ownership
-        run: |
-          useradd -g wheel -m makepkg
-          echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-          # this is to fix GIT not liking owner of the checkout dir
-          chown -R makepkg:root $PWD
+        run: chown -R $(id -u):$(id -g) $PWD
 
       - name: Config git user and email
         run: |
-          su makepkg && \
-          git config --global user.name tkit1994 && \
-          git config --global user.email ch1994@outlook.com
+          git config --global user.name "github action bot" && \
+          git config --global user.email action@github.com
 
       - name: Set up github token
         run: |
-          su makepkg && \
           cat << EOF > key.toml
           [keys]
           github = "${{ secrets.GITHUB_TOKEN }}"
