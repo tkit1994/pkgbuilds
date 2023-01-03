@@ -17,7 +17,7 @@ jobs:
         run: |
           cat << EOF | tee key.toml
           [key]
-          github = "${{ secrets.GITHUB_TOKEN }}"
+          # github = "${{ secrets.GITHUB_TOKEN }}"
           EOF
 
       - uses: actions/checkout@main
@@ -26,7 +26,7 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          known_hosts: unnecessary
           config: ${{ secrets.CONFIG }}
 
       - name: Setup tmate session
