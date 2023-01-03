@@ -15,7 +15,7 @@ jobs:
 
       - name: Set up github token
         run: |
-          cat << EOF | tee key.toml
+          cat << EOF > key.toml
           [key]
           # github = "${{ secrets.GITHUB_TOKEN }}"
           EOF
