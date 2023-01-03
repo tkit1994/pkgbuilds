@@ -34,7 +34,6 @@ function check_ver() {
 	if git diff --exit-code >/dev/null; then
 		git commit -m "nvchecker update"
 	fi
-
 }
 
 check_ver
