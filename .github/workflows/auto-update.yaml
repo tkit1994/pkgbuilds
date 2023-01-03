@@ -11,7 +11,7 @@ jobs:
       - name: Install packages
         run: |
           pacman -Syy --noconfirm
-          pacman -S --needed --noconfirm git jq aurpublish nvchecker
+          pacman -S --needed --noconfirm git jq aurpublish nvchecker make
 
       - uses: actions/checkout@main
 
