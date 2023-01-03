@@ -1,17 +1,17 @@
 name: CI
 on:
   workflow_dispatch:
-  # pull_request:
+  pull_request:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     container: ghcr.io/tkit1994/pkgbuilds:latest
     steps:
-      - uses: actions/checkout@main
-
       - name: Set ownership
         run: chown -R $(id -u):$(id -g) $PWD
+
+      - uses: actions/checkout@main
 
       - name: Config git user and email
         run: |
