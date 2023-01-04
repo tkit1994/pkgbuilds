@@ -1,6 +1,8 @@
 #!/bin/bash
 # set -x
 # set -e
+function user_exists() { id "$1" &>/dev/null; }
+
 function update_pkg() {
 	PKG_NAME=$1
 	NEW_VER=$(echo "$2" | sed 's/^[^.0-9]*//')
@@ -18,24 +20,33 @@ function update_pkg() {
 		pushd $PKG_NAME
 		sed "s/^pkgver=.*$/pkgver=${NEW_VER}/" -i PKGBUILD
 		sed "s/^pkgrel=.*$/pkgrel=1/" -i PKGBUILD
-		updpkgsums
-		makepkg --printsrcinfo > .SRCINFO
+		if user_exists makepkg; then
+			echo "run makepkg as user makepkg"
+			su makepkg -c "updpkgsums"
+			su makepkg -c "makepkg --printsrcinfo > .SRCINFO"
+		else
+			updpkgsums
+			makepkg --printsrcinfo > .SRCINFO
+		fi
 		popd
 		git add $PKG_NAME
 		git commit -m "update $PKG_NAME from $OLD_VER to $NEW_VER"
-		# aurpublish $PKG_NAME
+		aurpublish $PKG_NAME
 		;;
 	esac
 }
 
 function check_ver() {
-	nvchecker --logger both -c nvchecker.toml | tee nvchecker.log
+	if [[ -f key.toml ]]; then
+		nvchecker --logger both -c nvchecker.toml -k key.toml | tee nvchecker.log
+	else
+		nvchecker --logger both -c nvchecker.toml | tee nvchecker.log
+	fi
 	nvtake -c nvchecker.toml --all
-	git add *.json
+	git add .
 	if git diff --exit-code >/dev/null; then
 		git commit -m "nvchecker update"
 	fi
-
 }
 
 check_ver
