@@ -31,7 +31,7 @@ function update_pkg() {
 		popd
 		git add $PKG_NAME
 		git commit -m "update $PKG_NAME from $OLD_VER to $NEW_VER"
-		aurpublish $PKG_NAME -s
+		aurpublish $PKG_NAME
 		;;
 	esac
 }
