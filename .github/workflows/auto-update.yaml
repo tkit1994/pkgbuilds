@@ -1,0 +1,68 @@
+name: Auto update
+on:
+  workflow_dispatch:
+  # pull_request:
+  # push:
+  # schedule:
+  #   - cron: 0 17 * * *
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    container: archlinux:base-devel
+    steps:
+      - name: Install packages
+        run: |
+          pacman -Syy --noconfirm
+          pacman -S --needed --noconfirm git nvchecker \
+            vim aurpublish make sudo jq pacman-contrib \
+            fish
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: unnecessary
+
+      - name: set up ssh config
+        run: |
+          cat << EOF | tee /root/.ssh/config
+          Host aur
+            User aur
+            Hostname aur.archlinux.org
+            StrictHostKeyChecking no
+            UserKnownHostsFile /dev/null
+          EOF
+
+      - name: add makepkg user
+        run: useradd makepkg
+
+      - uses: actions/checkout@main
+        with:
+          fetch-depth: 0
+
+      - name: Generate key.toml
+        run: |
+          cat << EOF | tee key.toml
+          [keys]
+          github = "${{ secrets.GITHUB_TOKEN }}"
+          EOF
+
+      - name: config git
+        run: |
+          chown -R makepkg:root ${GITHUB_WORKSPACE}
+          git config --global --add safe.directory ${GITHUB_WORKSPACE}
+          git config user.name "github action[bot]"
+          git config user.email "action@github.com"
+
+      - name: run update script
+        run: ./update.sh
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+
+        # - name: Setup tmate session
+        #   uses: mxschmitt/action-tmate@v3

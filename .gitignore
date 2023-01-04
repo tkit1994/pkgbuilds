@@ -27,3 +27,5 @@
 .repo
 
 !.github/**/*
+
+key.toml
