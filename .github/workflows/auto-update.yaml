@@ -3,8 +3,8 @@ on:
   workflow_dispatch:
   # pull_request:
   # push:
-  # schedule:
-  #   - cron: 0 17 * * *
+  schedule:
+    - cron: 0 17 * * *
 
 jobs:
   update:
