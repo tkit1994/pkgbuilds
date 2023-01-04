@@ -52,8 +52,5 @@ done
 
 # commit nvchecker changes
 nvtake -c nvchecker.toml --all
-git add .
-if git diff --exit-code >/dev/null; then
-	git commit -m "nvchecker update"
-fi
+git commit -am "nvchecker update" || echo "nothing to update"
 
