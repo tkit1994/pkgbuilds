@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Install packages
         run: |
-          pacman -Syy --noconfirm
+          pacman -Syu --noconfirm
           pacman -S --needed --noconfirm git nvchecker \
             vim aurpublish make sudo jq pacman-contrib \
             fish
