@@ -31,9 +31,10 @@ function update_pkg() {
 		popd
 		git add $PKG_NAME
 		git commit -m "update $PKG_NAME from $OLD_VER to $NEW_VER"
-		aurpublish $PKG_NAME -s
 		;;
 	esac
+ 	aurpublish $PKG_NAME -s
+
 }
 
 # use nvchecker to check new versions
