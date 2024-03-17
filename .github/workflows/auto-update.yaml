@@ -18,24 +18,22 @@ jobs:
             vim aurpublish make sudo jq pacman-contrib \
             fish
 
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: unnecessary
+      - name: Configure git makepkg and ssh
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | install -Dm400 /dev/stdin /root/.ssh/aur
+          useradd makepkg
 
       - name: set up ssh config
         run: |
           cat << EOF | tee /root/.ssh/config
-          Host aur
+          Host aur.archlinux.org
             User aur
-            Hostname aur.archlinux.org
-            StrictHostKeyChecking no
+            IdentityFile /root/.ssh/aur
             UserKnownHostsFile /dev/null
+            StrictHostKeyChecking no
           EOF
-
-      - name: add makepkg user
-        run: useradd makepkg
+      - name: copy ssh directory
+        run: cp -rvf /root/.ssh ~/.ssh
 
       - uses: actions/checkout@main
         with:
@@ -64,5 +62,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
 
-        # - name: Setup tmate session
-        #   uses: mxschmitt/action-tmate@v3
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3

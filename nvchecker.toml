@@ -2,10 +2,6 @@
 oldver = "old_ver.json"
 newver = "new_ver.json"
 
-[freewb]
-source = "cmd"
-cmd = "curl -s https://d.store.deepinos.org.cn///store/tools/freewb/app.json  | jq -r '.Version'"
-
 [netease-cloud-music-gtk4]
 source = "github"
 github = "gmg137/netease-cloud-music-gtk"
