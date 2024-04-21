@@ -1,7 +1,30 @@
 {
-  "aliyundrive-webdav": "v2.3.3",
-  "netease-cloud-music-gtk4": "2.3.1",
-  "stream-url-bin": "v0.2.13",
-  "transfer-bin": "v0.4.17",
-  "unblockneteasemusic-bin": "v0.27.6"
+  "version": 2,
+  "data": {
+    "aliyundrive-webdav": {
+      "version": "v2.3.3",
+      "gitref": "refs/tags/v2.3.3",
+      "url": "https://github.com/messense/aliyundrive-webdav/releases/tag/v2.3.3"
+    },
+    "netease-cloud-music-gtk4": {
+      "version": "2.3.1",
+      "gitref": "refs/tags/2.3.1",
+      "url": "https://github.com/gmg137/netease-cloud-music-gtk/releases/tag/2.3.1"
+    },
+    "stream-url-bin": {
+      "version": "v0.2.13",
+      "gitref": "refs/tags/v0.2.13",
+      "url": "https://github.com/tkit1994/stream-url/releases/tag/v0.2.13"
+    },
+    "transfer-bin": {
+      "version": "v0.4.17",
+      "gitref": "refs/tags/v0.4.17",
+      "url": "https://github.com/Mikubill/transfer/releases/tag/v0.4.17"
+    },
+    "unblockneteasemusic-bin": {
+      "version": "v0.27.6",
+      "gitref": "refs/tags/v0.27.6",
+      "url": "https://github.com/UnblockNeteaseMusic/server/releases/tag/v0.27.6"
+    }
+  }
 }
