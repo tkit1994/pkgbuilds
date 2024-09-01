@@ -22,9 +22,9 @@
       "url": "https://github.com/Mikubill/transfer/releases/tag/v0.4.17"
     },
     "unblockneteasemusic-bin": {
-      "version": "v0.27.8",
-      "gitref": "refs/tags/v0.27.8",
-      "url": "https://github.com/UnblockNeteaseMusic/server/releases/tag/v0.27.8"
+      "version": "v0.27.8-patch.1",
+      "gitref": "refs/tags/v0.27.8-patch.1",
+      "url": "https://github.com/UnblockNeteaseMusic/server/releases/tag/v0.27.8-patch.1"
     }
   }
 }
