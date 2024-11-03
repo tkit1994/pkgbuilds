@@ -7,9 +7,9 @@
       "url": "https://github.com/messense/aliyundrive-webdav/releases/tag/v2.3.3"
     },
     "netease-cloud-music-gtk4": {
-      "version": "2.4.1",
-      "gitref": "refs/tags/2.4.1",
-      "url": "https://github.com/gmg137/netease-cloud-music-gtk/releases/tag/2.4.1"
+      "version": "2.5.0",
+      "gitref": "refs/tags/2.5.0",
+      "url": "https://github.com/gmg137/netease-cloud-music-gtk/releases/tag/2.5.0"
     },
     "stream-url-bin": {
       "version": "v0.2.13",
